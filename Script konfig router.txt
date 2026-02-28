@@ -1,0 +1,62 @@
+enable
+configure terminal
+no ip domain-lookup 
+hostname RouterSon
+banner motd ”RouterSon kun for autoriserede brugere 
+
+ 
+security passwords min-length 8
+login block-for 300 attempts 3 within 60
+enable secret Redbirds
+service password-encryption
+ip domain-name Opgave.dk
+crypto key generate rsa 
+2048
+iP SSH version 2
+username RouterSon secret Blackbird
+
+line vty 0 15
+transport input SSH
+login local
+exec-timeout 4 0
+logging synchronous
+exit
+
+line console 0
+login local
+logging synchronous
+exec-timeout 4 0
+exit
+
+
+ipv6 unicast-routing
+interface g0/0/0
+description SonLan
+ip address 192.168.40.1 255.255.255.192
+no shut
+ipv6 address 2001:db8:6ae2:1::1/64
+ipv6 address FE80::1 link-local
+interface g0/0/1
+description SonWan
+ip address 192.168.40.145 255.255.255.248
+no shut
+ipv6 address 2001:db8:6ae2:10::1/64
+ipv6 address fe80::1 link-local
+exit
+
+router rip
+version 2
+no auto-summary
+network 192.168.40.0
+ipv6 router rip Opgave
+interface g0/0/0
+
+ipv6 rip Opgave enable
+interface g0/0/1
+ipv6 rip Opgave enable
+end
+
+wr
+copy running-config tftp
+192.168.40.5
+RouterSonConfig
