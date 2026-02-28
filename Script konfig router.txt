@@ -53,7 +53,6 @@ interface g0/0/0
 ipv6 rip Opgave enable
 exit
 
-ipv6 rip Opgave enable
 interface g0/0/1
 ipv6 rip Opgave enable
 exit
@@ -63,5 +62,6 @@ wr
 copy running-config tftp
 192.168.40.5
 RouterSonConfig
+
 
 
