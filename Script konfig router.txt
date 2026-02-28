@@ -50,6 +50,7 @@ no auto-summary
 network 192.168.40.0
 ipv6 router rip Opgave
 interface g0/0/0
+exit
 
 ipv6 rip Opgave enable
 interface g0/0/1
@@ -59,4 +60,5 @@ end
 wr
 copy running-config tftp
 192.168.40.5
+
 RouterSonConfig
